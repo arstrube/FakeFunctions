@@ -36,8 +36,9 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="Used.h" />
-		<Unit filename="UsedFake.cpp" />
-		<Unit filename="UsedFake.h" />
+		<Unit filename="Used_Fakes.cpp" />
+		<Unit filename="Used_Fakes.h" />
+		<Unit filename="Used_Real.cpp" />
 		<Unit filename="User.c">
 			<Option compilerVar="CC" />
 		</Unit>

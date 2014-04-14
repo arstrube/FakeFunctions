@@ -25,6 +25,6 @@ RunAllTests.cpp - Unit tests that test-drive all of the above and
                   demonstrate how to use it.
 
 This is just a very basic example; no guarantees for usefulness
-or anything! Use as a template for building your own fake classes.
+or anything! Use as a template for building your own fake functions.
 
 (c) 2014 Arnd R. Strube
