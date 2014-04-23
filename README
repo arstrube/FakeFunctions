@@ -1,10 +1,11 @@
 RUNTIME-SELECTABLE CPPUTEST FAKE FUNCTION EXAMPLE
 
-Sometimes it is desirable to test some functions of a module itself,
-while faking others, all in the same test case. This cannot be done 
-via linker substitution.
+Sometimes, when faking a module, it is desirable to use production
+code for some functions, while mocking others, and using dummies for 
+elsewhere, all in the same test executable. This cannot be done via
+linker substitution.
 
-The following is a very basic example of how to set up fake functions
+This code is a very basic example of how to set up fake functions
 that can be swapped individually at run-time.
 
 The assumption is that the code to be tested is written in pure C. 
