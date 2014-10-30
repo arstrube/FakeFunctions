@@ -9,7 +9,7 @@ extern "C" {
 
 #include "Used_Fakes.h"
 
-TEST_GROUP(Used) {
+TEST_GROUP(Used_withDummy) {
 }; 
 TEST(Used, add) {
     LONGS_EQUAL(0, Used_add(5555, 123));
