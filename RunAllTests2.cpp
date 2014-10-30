@@ -15,51 +15,48 @@ long User_calculate(long a, long b) {
 }
 
 /// Dummies ///////////////////////////////////////////////
-long Used_add_Dummy(long, long) { return 0L; }
-long Used_subtract_Dummy(long, long) { return 0L; }
-
-/// Structure to hold function pointers ///////////////////
-struct Used_Fakes {
-    long (*add)(long a, long b);
-    long (*subtract)(long a, long b);
-} sUsed_Fakes = {
-    .add = Used_add_Dummy,
-    .subtract = Used_subtract_Dummy,
+struct Used {
+    virtual long add(long, long) { return 0l; }
+    virtual long subtract(long, long) { return 0l; }
 };
 
-/// Mocks /////////////////////////////////////////////////
-long Used_add_Mock(long a, long b) {
-    mock().actualCall("Used_add")
-          .withParameter("a", a)
-          .withParameter("b", b);
-    return mock().returnValue().getLongIntValue();
-}
-long Used_subtract_Mock(long a, long b) {
-    mock().actualCall("Used_subtract")
-          .withParameter("a", a)
-          .withParameter("b", b);
-    return mock().returnValue().getLongIntValue();
-}
+struct Used_Mock : public Used {
+    virtual long add(long a, long b) override {
+        mock().actualCall("Used_add")
+             .withParameter("a", a)
+             .withParameter("b", b);
+        return mock().returnValue().getLongIntValue();
+    }
+    virtual long Used_subtract_Mock(long a, long b) {
+        mock().actualCall("Used_subtract")
+             .withParameter("a", a)
+             .withParameter("b", b);
+        return mock().returnValue().getLongIntValue();
+    }
+};
+
+#include <cstdio>
+struct Used_Stub : public Used {
+    virtual long add(long a, long b) override {
+        printf("\n    Used_add(%ld, %ld) was called\n", a, b);
+        fflush(stdout);
+        return a + b;
+    }
+    virtual long subtract(long a, long b) override {
+        printf("\n    Used_subtract(%ld, %ld) was called\n", a, b);
+        fflush(stdout);
+        return a - b;
+    }
+};
+
+static Used used;
 
 /// Fake proxies called by production code ///////////////
 long Used_add(long a, long b) {
-    return sUsed_Fakes.add(a, b);
+    return used.add(a, b);
 }
 long Used_subtract(long a, long b) {
-    return sUsed_Fakes.subtract(a, b);
-}
-
-/// Handwritten stubs /////////////////////////////////////
-#include <cstdio>
-long Used_add_Stub(long a, long b) {
-    printf("\n    Used_add(%ld, %ld) was called\n", a, b);
-    fflush(stdout);
-    return a + b;
-}
-long Used_subtract_Stub(long a, long b) {
-    printf("\n    Used_subtract(%ld, %ld) was called\n", a, b);
-    fflush(stdout);
-    return a - b;
+    return used.subtract(a, b);
 }
 
 } // extern "C"
@@ -75,8 +72,8 @@ TEST(Used_withDummy, subtract) {
 
 TEST_GROUP(User_withUsedStubCode) {
     void setup() override {
-        UT_PTR_SET(sUsed_Fakes.add, Used_add_Stub);
-        UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Stub);
+//        UT_PTR_SET(sUsed_Fakes.add, Used_add_Stub);
+//        UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Stub);
     }
 };
 TEST(User_withUsedStubCode, calculate) {
@@ -85,8 +82,8 @@ TEST(User_withUsedStubCode, calculate) {
 
 TEST_GROUP(User_withUsedMockCode) {
     void setup() override {
-        UT_PTR_SET(sUsed_Fakes.add, Used_add_Mock);
-        UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Mock);
+//        UT_PTR_SET(sUsed_Fakes.add, Used_add_Mock);
+ //       UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Mock);
     }
     void teardown() {
         mock().clear();
@@ -111,8 +108,8 @@ TEST(User_withUsedMockCode, calculate) {
 
 TEST_GROUP(User_withUsedMixed) {
     void setup() override {
-        UT_PTR_SET(sUsed_Fakes.add, Used_add_Stub);
-        UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Mock);
+//        UT_PTR_SET(sUsed_Fakes.add, Used_add_Stub);
+//        UT_PTR_SET(sUsed_Fakes.subtract, Used_subtract_Mock);
     }
     void teardown() override {
         mock().clear();
