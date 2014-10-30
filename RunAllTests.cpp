@@ -11,10 +11,10 @@ extern "C" {
 
 TEST_GROUP(Used_withDummy) {
 }; 
-TEST(Used, add) {
+TEST(Used_withDummy, add) {
     LONGS_EQUAL(0, Used_add(5555, 123));
 }
-TEST(Used, subtract) {
+TEST(Used_withDummy, subtract) {
     LONGS_EQUAL(0, Used_subtract(-34567, -34568));
 }
 
