@@ -13,18 +13,21 @@ Our fake functions, on the other hand, work by harnessing the full
 power of object-oriented design and the C++ language. I have tried
 to keep everything as simple as possible.
 
-Used.c          - C Module that other code depends on
-User.c          - C Module that depends on the above
-Used_Fakes.cpp  - This is really C code - it only uses the convenience
-                  of leaving out unused parameter names. It lets you 
-                  choose at run-time via the UT_PTR_SET macro,
-                  whether each individual function should be mocked, 
-                  stubbed, replaced by a dummy, or whether the real 
-                  implementation will be called for the Used module.
-                  Default is to use empty dummies.
-RunAllTests.cpp - Unit tests that test-drive all of the above and
-                  demonstrate how to use it.
-
+Used.c           - C Module that other code depends on
+User.c           - C Module that depends on the above
+Used_Fakes.cpp   - This is really C code - it only uses the convenience
+                   of leaving out unused parameter names. It lets you 
+                   choose at run-time via the UT_PTR_SET macro,
+                   whether each individual function should be mocked, 
+                   stubbed, replaced by a dummy, or whether the real 
+                   implementation will be called for the Used module.
+                   Default is to use empty dummies.
+RunAllTests.cpp  - Unit tests that test-drive all of the above and
+                   demonstrate how to use it.
+RunAllTests2.cpp - Presents the whole thing in one file for easier
+                   understanding. This does not include real code
+                   for Used_xxx().
+                   
 This is just a very basic example; no guarantees for usefulness
 or anything! Use as a template for building your own fake functions.
 
