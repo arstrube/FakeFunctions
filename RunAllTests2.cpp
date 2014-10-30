@@ -19,11 +19,10 @@ long Used_add_Dummy(long, long) { return 0L; }
 long Used_subtract_Dummy(long, long) { return 0L; }
 
 /// Structure to hold function pointers ///////////////////
-typedef struct Used_Fakes {
+struct Used_Fakes {
     long (*add)(long a, long b);
     long (*subtract)(long a, long b);
-} Used_Fakes;
-Used_Fakes sUsed_Fakes = {
+} sUsed_Fakes = {
     .add = Used_add_Dummy,
     .subtract = Used_subtract_Dummy,
 };
