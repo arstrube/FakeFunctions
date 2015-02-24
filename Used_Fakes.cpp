@@ -16,12 +16,10 @@ namespace Dummy {
     long Used_subtract(long, long) { return 0L; }
 }
 
-/** Struct to hold function pointers
+/** Initialization of function pointers
  */
-Used_Fakes sUsed_Fakes = {
-    .add = Dummy::Used_add,
-    .subtract = Dummy::Used_subtract,
-};
+long (*Used_Fakes::add)(long a, long b) = Dummy::Used_add;
+long (*Used_Fakes::subtract)(long a, long b) = Dummy::Used_subtract;
 
 /** Mock implementations
  */
@@ -43,10 +41,10 @@ namespace Mock {
 /** Wrappers to be linked in place of original functions
  */
 extern "C" long Used_add(long a, long b) {
-    return sUsed_Fakes.add(a, b);
+    return Used_Fakes::add(a, b);
 }
 extern "C" long Used_subtract(long a, long b) {
-    return sUsed_Fakes.subtract(a, b);
+    return Used_Fakes::subtract(a, b);
 }
 
 /** Mock implementations 

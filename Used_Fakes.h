@@ -1,12 +1,10 @@
 #ifndef USED_FAKES_H_ 
 #define USED_FAKES_H_
 
-typedef struct Used_Fakes {
-    long (*add)(long a, long b);
-    long (*subtract)(long a, long b);
-} Used_Fakes;
-
-extern Used_Fakes sUsed_Fakes;
+struct Used_Fakes {
+    static long (*add)(long a, long b);
+    static long (*subtract)(long a, long b);
+};
 
 namespace Dummy{
     long Used_add(long a, long b);
