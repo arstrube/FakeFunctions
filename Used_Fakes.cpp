@@ -1,17 +1,24 @@
 #include "CppUTestExt/MockSupport.h"
 
 extern "C" {
+}
 
-#include "Used.h"
+namespace C {
+    #include "Used.c" /** C++ will mangle function names */
+}
+
 #include "Used_Fakes.h"
-long Used_add_Dummy(long, long) { return 0L; }
-long Used_subtract_Dummy(long, long) { return 0L; }
+namespace Dummy {
+    long Used_add(long, long) { return 0L; }
+    long Used_subtract(long, long) { return 0L; }
+}
 
 Used_Fakes sUsed_Fakes = {
-    .add = Used_add_Dummy,
-    .subtract = Used_subtract_Dummy,
+    .add = Dummy::Used_add,
+    .subtract = Dummy::Used_subtract,
 };
 
+namespace Mock {
 long Used_add_Mock(long a, long b) {
     mock().actualCall("Used_add")
           .withParameter("a", a)
@@ -24,16 +31,18 @@ long Used_subtract_Mock(long a, long b) {
           .withParameter("b", b);
     return mock().returnValue().getLongIntValue();
 }
+}
 
-long Used_add(long a, long b) {
+extern "C" long Used_add(long a, long b) {
     return sUsed_Fakes.add(a, b);
 }
-long Used_subtract(long a, long b) {
+extern "C" long Used_subtract(long a, long b) {
     return sUsed_Fakes.subtract(a, b);
 }
 
 #include <cstdio>
 
+namespace Stub {
 long Used_add_Stub(long a, long b) {
     printf("\n    Used_add(%ld, %ld) was called\n", a, b);
     return a + b;
