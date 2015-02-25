@@ -1,8 +1,8 @@
 #include "User.h"
 #include "Used.h"
 
-long User_calculate(long a, long b) {
-    long temp1 = Used_add(a, a);
-    long temp2 = Used_subtract(b, a);
-    return Used_subtract(temp1, temp2);
+unsigned long User_multiply(unsigned long a, unsigned long b) {
+    unsigned long i, tmp = 0;
+    for (i=0; i<=b; i++) tmp = Used_add(tmp, a);
+    return Used_subtract(tmp, a); /// this is on purpose!
 }

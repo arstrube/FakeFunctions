@@ -36,8 +36,8 @@ TEST_GROUP(User_withUsedRealCode) {
         UT_PTR_SET(Used_Fake::subtract, C::Used_subtract);
     }
 };
-TEST(User_withUsedRealCode, calculate) {
-    LONGS_EQUAL(-141, User_calculate(57, 312));
+TEST(User_withUsedRealCode, multiply) {
+    LONGS_EQUAL(1000000, User_multiply(200000, 5));
 }
 
 TEST_GROUP(User_withUsedStubCode) {
@@ -46,8 +46,8 @@ TEST_GROUP(User_withUsedStubCode) {
         UT_PTR_SET(Used_Fake::subtract, Stub::Used_subtract_Stub);
     }
 };
-TEST(User_withUsedStubCode, calculate) {
-    LONGS_EQUAL(-141, User_calculate(57, 312));
+TEST(User_withUsedStubCode, multiply) {
+    LONGS_EQUAL(330000, User_multiply(110000, 3));
 }
 
 TEST_GROUP(User_withUsedMockCode) {
@@ -61,18 +61,16 @@ TEST_GROUP(User_withUsedMockCode) {
 };
 TEST(User_withUsedMockCode, calculate) {
     mock().expectOneCall("Used_add")
-          .withParameter("a", 57)
-          .withParameter("b", 57)
-          .andReturnValue(114);
+          .withParameter("a", 0).withParameter("b", 3).andReturnValue(3);
+    mock().expectOneCall("Used_add")
+          .withParameter("a", 3).withParameter("b", 3).andReturnValue(6);
+    mock().expectOneCall("Used_add")
+          .withParameter("a", 6).withParameter("b", 3).andReturnValue(9);
+    mock().expectOneCall("Used_add")
+          .withParameter("a", 9).withParameter("b", 3).andReturnValue(12);
     mock().expectOneCall("Used_subtract")
-          .withParameter("a", 312)
-          .withParameter("b", 57)
-          .andReturnValue(255);
-    mock().expectOneCall("Used_subtract")
-          .withParameter("a", 114)
-          .withParameter("b", 255)
-          .andReturnValue(-141);
-    LONGS_EQUAL(-141, User_calculate(57, 312));
+          .withParameter("a", 12).withParameter("b", 3).andReturnValue(9);
+    LONGS_EQUAL(9, User_multiply(3, 3));
     mock().checkExpectations();
 }
 
@@ -85,16 +83,12 @@ TEST_GROUP(User_withUsedMixed) {
         mock().clear();
     }
 };
-TEST(User_withUsedMixed, calculate) {
+TEST(User_withUsedMixed, multiply) {
     mock().expectOneCall("Used_subtract")
-          .withParameter("a", 312)
-          .withParameter("b", 57)
-          .andReturnValue(255);
-    mock().expectOneCall("Used_subtract")
-          .withParameter("a", 114)
-          .withParameter("b", 255)
-          .andReturnValue(-141);
-    LONGS_EQUAL(-141, User_calculate(57, 312));
+          .withParameter("a", 20)
+          .withParameter("b", 5)
+          .andReturnValue(15);
+    LONGS_EQUAL(15, User_multiply(5, 3));
 }
 
 int main(int ac, char** av)
