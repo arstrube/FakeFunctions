@@ -32,11 +32,11 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="Used.h" />
+		<Unit filename="UsedByUsed.c" />
+		<Unit filename="UsedByUsed.h" />
 		<Unit filename="Used_Fakes.cpp" />
 		<Unit filename="Used_Fakes.h" />
-		<Unit filename="User.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="User.c" />
 		<Unit filename="User.h" />
 		<Extensions>
 			<code_completion />
