@@ -3,7 +3,6 @@
 #include "CppUTestExt/MockSupport.h"
 
 extern "C" {
-    #include "Used.h"
     #include "User.h"
 }
 
