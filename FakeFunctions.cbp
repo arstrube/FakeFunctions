@@ -4,13 +4,31 @@
 	<Project>
 		<Option title="FakeFunctions" />
 		<Option pch_mode="2" />
-		<Option compiler="cygwin" />
+		<Option compiler="cygwin_gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="out/Debug/06_FakeClass" prefix_auto="1" extension_auto="1" />
+				<Option output="out/Debug/FakeFunctions" prefix_auto="1" extension_auto="1" />
 				<Option object_output="out/Debug/" />
 				<Option type="1" />
-				<Option compiler="cygwin" />
+				<Option compiler="cygwin_gcc" />
+				<Compiler>
+					<Add directory="E:/CppUTest/include" />
+				</Compiler>
+				<Linker>
+					<Add directory="E:/CppUTest/lib" />
+				</Linker>
+			</Target>
+			<Target title="Debug-Mac">
+				<Option output="out/Debug/FakeFunctions.app" prefix_auto="1" extension_auto="0" />
+				<Option object_output="out/Debug/" />
+				<Option type="1" />
+				<Option compiler="cygwin_gcc" />
+				<Compiler>
+					<Add directory="/usr/Local/include" />
+				</Compiler>
+				<Linker>
+					<Add directory="/usr/local/lib" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
@@ -18,12 +36,10 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 			<Add option="-Werror" />
-			<Add directory="E:/CppUTest/include" />
 		</Compiler>
 		<Linker>
 			<Add library="CppUTest" />
 			<Add library="CppUTestExt" />
-			<Add directory="E:/CppUTest/lib" />
 		</Linker>
 		<Unit filename="README" />
 		<Unit filename="RunAllTests.cpp" />
@@ -32,15 +48,20 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="Used.h" />
-		<Unit filename="UsedByUsed.c" />
+		<Unit filename="UsedByUsed.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="UsedByUsed.h" />
-		<Unit filename="Used_Fakes.cpp" />
-		<Unit filename="Used_Fakes.h" />
-		<Unit filename="User.c" />
+		<Unit filename="Used_Fake.cpp" />
+		<Unit filename="Used_Fake.h" />
+		<Unit filename="User.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="User.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
