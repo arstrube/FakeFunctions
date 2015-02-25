@@ -6,7 +6,7 @@ extern "C" {
     #include "used.h"
 }
 
-struct Used_Fakes {
+struct Used_Fake {
     static long (*add)(long a, long b);
     static long (*subtract)(long a, long b);
 };

@@ -40,14 +40,14 @@ namespace C {
 
 /** Initialization of function pointers
  */
-long (*Used_Fakes::add)(long a, long b) = Dummy::Used_add;
-long (*Used_Fakes::subtract)(long a, long b) = Dummy::Used_subtract;
+long (*Used_Fake::add)(long a, long b) = Dummy::Used_add;
+long (*Used_Fake::subtract)(long a, long b) = Dummy::Used_subtract;
 
 /** Wrappers to be linked in place of original functions
  */
 extern "C" long Used_add(long a, long b) {
-    return Used_Fakes::add(a, b);
+    return Used_Fake::add(a, b);
 }
 extern "C" long Used_subtract(long a, long b) {
-    return Used_Fakes::subtract(a, b);
+    return Used_Fake::subtract(a, b);
 }
