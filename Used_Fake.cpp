@@ -1,6 +1,6 @@
 #include "CppUTestExt/MockSupport.h"
 
-#include "Used_Fakes.h"
+#include "Used_Fake.h"
 
 namespace Dummy {
     long Used_add(long, long) { return 0L; }
