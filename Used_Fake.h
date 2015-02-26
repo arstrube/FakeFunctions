@@ -11,7 +11,7 @@ struct Used_Fake {
     static long (*subtract)(long a, long b);
 };
 
-namespace Dummy{
+namespace Dummy {
     long Used_add(long a, long b);
     long Used_subtract(long a, long b);
 }
