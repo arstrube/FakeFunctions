@@ -17,13 +17,13 @@ namespace Dummy {
 }
 
 namespace Mock {
-    long Used_add_Mock(long a, long b);
-    long Used_subtract_Mock(long a, long b);
+    long Used_add(long a, long b);
+    long Used_subtract(long a, long b);
 }
 
 namespace Stub {
-    long Used_add_Stub(long a, long b);
-    long Used_subtract_Stub(long a, long b);
+    long Used_add(long a, long b);
+    long Used_subtract(long a, long b);
 }
 
 namespace C {

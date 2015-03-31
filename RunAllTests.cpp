@@ -42,8 +42,8 @@ TEST(User_withUsedRealCode, multiply) {
 
 TEST_GROUP(User_withUsedStubCode) {
     void setup() {
-        UT_PTR_SET(Used_Fake::add, Stub::Used_add_Stub);
-        UT_PTR_SET(Used_Fake::subtract, Stub::Used_subtract_Stub);
+        UT_PTR_SET(Used_Fake::add, Stub::Used_add);
+        UT_PTR_SET(Used_Fake::subtract, Stub::Used_subtract);
     }
 };
 TEST(User_withUsedStubCode, multiply) {
@@ -52,8 +52,8 @@ TEST(User_withUsedStubCode, multiply) {
 
 TEST_GROUP(User_withUsedMockCode) {
     void setup() {
-        UT_PTR_SET(Used_Fake::add, Mock::Used_add_Mock);
-        UT_PTR_SET(Used_Fake::subtract, Mock::Used_subtract_Mock);
+        UT_PTR_SET(Used_Fake::add, Mock::Used_add);
+        UT_PTR_SET(Used_Fake::subtract, Mock::Used_subtract);
     }
     void teardown() {
         mock().clear();
@@ -76,8 +76,8 @@ TEST(User_withUsedMockCode, calculate) {
 
 TEST_GROUP(User_withUsedMixed) {
     void setup() {
-        UT_PTR_SET(Used_Fake::add, Stub::Used_add_Stub);
-        UT_PTR_SET(Used_Fake::subtract, Mock::Used_subtract_Mock);
+        UT_PTR_SET(Used_Fake::add, Stub::Used_add);
+        UT_PTR_SET(Used_Fake::subtract, Mock::Used_subtract);
     }
     void teardown() {
         mock().clear();
