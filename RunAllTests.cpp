@@ -6,7 +6,7 @@ extern "C" {
     #include "User.h"
 }
 
-#include "Used_Fake.h"
+#include "Used_Fake.h"  /// NEVER put this inside extern "C" {}
 
 TEST_GROUP(Used_withDummy) {
 }; 
